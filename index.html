@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>🎉chúc mừng sinh nhật bthuy!</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: #111;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #btn {
+      padding: 10px 20px;
+      background: #e91e63;
+      border: none;
+      color: #fff;
+      font-size: 1.2em;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    #message {
+      position: absolute;
+      top: 20%;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1s ease-in-out;
+      z-index: 2;
+    }
+
+    #message.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff; }
+      to { text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff69b4; }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      animation: spark 1s infinite ease-out;
+    }
+
+    @keyframes spark {
+      0% { opacity: 1; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(20px,-20px) scale(0); }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255,105,180,0.6);
+      transform: rotate(45deg);
+      animation: float 10s linear infinite, spin 4s linear infinite;
+      z-index: 1;
+    }
+
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255,105,180,0.6);
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after  { top: 0; left: -10px; }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(45deg); opacity: 0; }
+      30% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .floating-text {
+      position: absolute;
+      font-size: 1em;
+      color: white;
+      animation: floatText 10s linear infinite, shine 2s infinite alternate;
+      pointer-events: none;
+      opacity: 0.7;
+      z-index: 0;
+    }
+
+    @keyframes floatText {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes shine {
+      0% { text-shadow: 0 0 5px #fff; }
+      100% { text-shadow: 0 0 10px #ff69b4, 0 0 20px #fff; }
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<button id="btn">🎁 tuổi mới rực rỡ nha</button>
+
+<div id="message">
+  <h1>chúc mừng sinh nhật bthuy!</h1>
+  <p>chúc u luôn xai gính, vui vẻ và dí dỏm như bây giờ</p>
+</div>
+
+<audio id="bgm" loop autoplay>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  const btn = document.getElementById('btn');
+  const msg = document.getElementById('message');
+  const bgm = document.getElementById('bgm');
+
+  btn.addEventListener('click', () => {
+    msg.classList.add('show');
+    bgm.play();
+
+    // Tạo trái tim
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDelay = Math.random() * 10 + 's';
+      document.body.appendChild(heart);
+    }
+
+    // Lấp lánh
+    for (let i = 0; i < 40; i++) {
+      const s = document.createElement('div');
+      s.classList.add('sparkle');
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.top = Math.random() * 100 + 'vh';
+      s.style.animationDelay = Math.random() + 's';
+      document.body.appendChild(s);
+    }
+
+    // Tạo text bay
+    for (let i = 0; i < 20; i++) {
+      const t = document.createElement('div');
+      t.classList.add('floating-text');
+      t.innerText = 'chúc mừng sinh nhật bthuy 💫';
+      t.style.left = Math.random() * 100 + 'vw';
+      t.style.animationDelay = Math.random() * 10 + 's';
+      document.body.appendChild(t);
+    }
+
+    btn.style.display = 'none';
+  });
+</script>
+
+</body>
+</html>
